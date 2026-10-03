@@ -675,10 +675,7 @@ class AutoProxyTask(ScriptAutoProxyBase):
 
         launcher_path = self.launcher_path
         if launcher_path is None:
-            raise RuntimeError(
-                "未找到鸣潮官方启动器路径，请重新导入官方启动器，"
-                "或改用「直接启动」并手动选择游戏客户端文件"
-            )
+            raise RuntimeError("未找到鸣潮官方启动器路径，请重新导入启动器")
         await self._push_dispatch_log("未检测到运行中的客户端，正在拉起官方启动器...")
         await self.game_manager.open_process(
             launcher_path,
@@ -704,10 +701,7 @@ class AutoProxyTask(ScriptAutoProxyBase):
 
         game_process_path = self.game_process_path
         if game_process_path is None:
-            raise RuntimeError(
-                "未找到鸣潮客户端程序路径，请在直启模式下选择游戏客户端文件，"
-                "或重新导入官方启动器以自动定位"
-            )
+            raise RuntimeError("未找到鸣潮客户端程序路径，请重新导入启动器")
         await self._push_dispatch_log("未检测到运行中的客户端，正在直启鸣潮...")
         await self.game_manager.open_process(
             game_process_path,
