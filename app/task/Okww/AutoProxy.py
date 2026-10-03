@@ -261,9 +261,9 @@ class AutoProxyTask(ScriptAutoProxyBase):
                         "请重新选择"
                     )
                 self.game_process_path = client_exe
-            # 启动器失效时按兜底来源（注册表 → 卸载信息）找回。直启态已手填客户端
-            # 时启动器只服务更新，不必为它打扰用户；但启动器态没有启动器就拉不起
-            # 游戏，即使已填客户端也必须尝试找回
+            # 启动器失效时按注册表登记找回（启动器自己写的安装根）。
+            # 直启态已手填客户端时启动器只服务更新，不必为它打扰用户；
+            # 但启动器态没有启动器就拉不起游戏，即使已填客户端也必须尝试找回
             if not launcher_path.is_file() and (
                 self.game_process_path is None or self._game_launch_type() == "Launcher"
             ):
@@ -277,7 +277,7 @@ class AutoProxyTask(ScriptAutoProxyBase):
                     # 不能在这里直接推调度台：main_task 每轮开头会重置日志把它
                     # 清掉，存下来在启动流程内（重置之后）补推一次
                     self._fallback_notice = (
-                        f"已按兜底来源找回鸣潮启动器"
+                        f"已按注册表找回鸣潮启动器"
                         f"（{launcher_path.as_posix()}），"
                         "请更新脚本配置中的启动器路径"
                     )
@@ -289,7 +289,7 @@ class AutoProxyTask(ScriptAutoProxyBase):
                     # 报错文案会引导用户改用直启或重新导入启动器
                     self.game_process_path = fallback.process_path
                     self._fallback_notice = (
-                        f"已按兜底来源找回鸣潮客户端"
+                        f"已按注册表找回鸣潮客户端"
                         f"（{self.game_process_path.as_posix()}），"
                         "请更新脚本配置中的启动器路径"
                     )
